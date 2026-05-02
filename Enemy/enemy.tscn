@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bir8j3l1p16m2"]
+
+[ext_resource type="Texture2D" uid="uid://lrwscj23u5mm" path="res://textures/cild.png" id="1_2pb1h"]
+[ext_resource type="Script" uid="uid://c34e1li8absbq" path="res://Enemy/enemy.gd" id="1_px1sc"]
+
+[node name="Enemy" type="Area2D"]
+script = ExtResource("1_px1sc")
+
+[node name="Cild" type="Sprite2D" parent="."]
+texture = ExtResource("1_2pb1h")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(1.8999939, -196.6, -8.5, -190.9, -8.5, -184, -11.300003, -140.8, -47.399994, -118, -52.600006, -118, -65.600006, -81, -70, -81, -67.5, -31.5, -67.5, -24.699997, -42.100006, -0.3999939, -62.399994, 84, -71.399994, 84, -53.600006, 121, -104.6, 144, -114.1, 144, -111.5, 187.6, -111.5, 200.29999, 1.800003, 197, 13, 197, 16.399994, 128.20001, 21.800003, 127.70001, 28.5, 183, 28.5, 192.70001, 73.79999, 199, 141.5, 199, 148.5, 180, 154.79999, 180, 147.5, 144.9, 147.5, 138, 93.29999, 118.29999, 105.5, 68.20001, 105.5, 58.5, 67.399994, -11.899994, 87.5, -47.399994, 87.5, -94, 67.5, -124, 67.5, -128.6, 28.199997, -145.7, 33.5, -150.9, 33.5, -176.5)

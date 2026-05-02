@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://87c76oaotby"]
+
+[ext_resource type="Script" uid="uid://bu7dykcmxnkky" path="res://Player/PLayer.gd" id="1_4ntmi"]
+[ext_resource type="Texture2D" uid="uid://dc7lpff2tiwcu" path="res://textures/Cray.png" id="2_btcbx"]
+[ext_resource type="Texture2D" uid="uid://bsd73gis82qvx" path="res://textures/HB_Empty.png" id="3_gwnis"]
+[ext_resource type="Texture2D" uid="uid://dhx353uf4y8vg" path="res://textures/HB_Full.png" id="4_k53q1"]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_4ntmi")
+
+[node name="Cray" type="Sprite2D" parent="."]
+texture = ExtResource("2_btcbx")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(86.600006, -159.6, 35, -250, 9.399994, -250, -17.199997, -227, -20.800003, -227, -71.5, -122.3, -71.5, -115.5, -75.8, -116, -84.3, -116, -89.3, -103.399994, -73.5, -88.600006, -93.9, -73, -105.2, -73, -89.8, -25, -72.399994, -25, -70.5, 119.100006, -70.5, 129.1, -15.5, 141, -15.5, 145.5, 79.20001, 132, 88.600006, 132, 100.5, 10.5, 100.5, -23.100006, 121.5, -28, 131.1, -28, 136.1, -46, 141, -46, 135.5, -85, 135.5, -91.3, 137.5, -91.600006, 137.5, -107.100006, 126.600006, -118, 115.600006, -118, 120.5, -143, 120.5, -156)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.26, 0.26)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health" type="TextureProgressBar" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+step = 0.1
+value = 100.0
+texture_under = ExtResource("3_gwnis")
+texture_progress = ExtResource("4_k53q1")

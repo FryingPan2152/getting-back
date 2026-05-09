@@ -3,11 +3,16 @@ extends Area2D
 
 var destination: Vector2
 var attack_damage := 10.0
+var health := 100.0
 
 
 func _ready() -> void:
 	destination = global_position
-
+func _process(delta: float) -> void:
+	if health <= 0:
+		Player.points += 10
+		queue_free()
+	
 func _physics_process(delta: float) -> void:
 	
 #region Get to the player

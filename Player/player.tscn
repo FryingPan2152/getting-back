@@ -25,11 +25,35 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Health" type="TextureProgressBar" parent="CanvasLayer/Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Health" type="TextureProgressBar" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
 step = 0.1
 value = 100.0
 texture_under = ExtResource("3_gwnis")
 texture_progress = ExtResource("4_k53q1")
+
+[node name="pud cooldown bar" type="ProgressBar" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="Pts" type="Label" parent="CanvasLayer/Control2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Pud cooldonw" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true

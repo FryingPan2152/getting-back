@@ -1,5 +1,6 @@
 class_name Enemy
 extends Area2D
+@onready var Healthbar:= $HealthBarE
 
 var destination: Vector2
 var attack_damage := 10.0
@@ -9,8 +10,12 @@ var health := 100.0
 func _ready() -> void:
 	destination = global_position
 func _process(delta: float) -> void:
+	
+	Healthbar.set_point_position(1,Vector2(-100 + (health*2),-220))
+	
 	if health <= 0:
 		Player.points += 10
+		Enemies.enemy_count -= 1
 		queue_free()
 	
 func _physics_process(delta: float) -> void:

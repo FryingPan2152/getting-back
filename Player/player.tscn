@@ -1,9 +1,83 @@
-[gd_scene load_steps=5 format=3 uid="uid://87c76oaotby"]
+[gd_scene load_steps=12 format=3 uid="uid://87c76oaotby"]
 
 [ext_resource type="Script" uid="uid://bu7dykcmxnkky" path="res://Player/PLayer.gd" id="1_4ntmi"]
 [ext_resource type="Texture2D" uid="uid://dc7lpff2tiwcu" path="res://textures/Cray.png" id="2_btcbx"]
 [ext_resource type="Texture2D" uid="uid://bsd73gis82qvx" path="res://textures/HB_Empty.png" id="3_gwnis"]
 [ext_resource type="Texture2D" uid="uid://dhx353uf4y8vg" path="res://textures/HB_Full.png" id="4_k53q1"]
+[ext_resource type="PackedScene" uid="uid://b0p8t7judj4f1" path="res://shop_ui/shop.tscn" id="5_k53q1"]
+[ext_resource type="Texture2D" uid="uid://kfis2bxtidsy" path="res://textures/Sword_image.png" id="6_fhl08"]
+[ext_resource type="Script" uid="uid://dkk0xa6p6how5" path="res://Player/sword_area.gd" id="6_vtle1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k53q1"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0, 0.45882353, 0.9490196, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="Animation" id="Animation_fhl08"]
+resource_name = "sword_attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SwordArea:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(3, -357), Vector2(247, 4), Vector2(-4, 238), Vector2(247, 4), Vector2(3, -357)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SwordArea")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.40000004, 0.6333333, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"attack_enemies"
+}, {
+"args": [],
+"method": &"attack_enemies"
+}, {
+"args": [],
+"method": &"attack_enemies"
+}, {
+"args": [],
+"method": &"attack_enemies"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_vtle1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SwordArea:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, -357)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_od3ui"]
+_data = {
+&"RESET": SubResource("Animation_vtle1"),
+&"sword_attack": SubResource("Animation_fhl08")
+}
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_4ntmi")
@@ -18,6 +92,9 @@ polygon = PackedVector2Array(86.600006, -159.6, 35, -250, 9.399994, -250, -17.19
 zoom = Vector2(0.26, 0.26)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" parent="CanvasLayer" instance=ExtResource("5_k53q1")]
+visible = false
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -37,6 +114,17 @@ value = 100.0
 texture_under = ExtResource("3_gwnis")
 texture_progress = ExtResource("4_k53q1")
 
+[node name="Shield" type="ProgressBar" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_k53q1")
+value = 100.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/Shield"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "DSADASDADSASD"
+
 [node name="pud cooldown bar" type="ProgressBar" parent="CanvasLayer/Control/VBoxContainer"]
 layout_mode = 2
 
@@ -53,7 +141,24 @@ grow_horizontal = 0
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+text = "POINTS"
 
 [node name="Pud cooldonw" type="Timer" parent="."]
 wait_time = 10.0
 one_shot = true
+
+[node name="SwordArea" type="Area2D" parent="."]
+position = Vector2(3, -357)
+script = ExtResource("6_vtle1")
+
+[node name="SwordImage" type="Sprite2D" parent="SwordArea"]
+texture = ExtResource("6_fhl08")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SwordArea"]
+polygon = PackedVector2Array(22, -62.4, 17.199997, -64, 12, -64, 12, -62.8, 0.099998474, -49, -1.4000015, -49, -5.4000015, -38, -7.0999985, -38, -5, 15.099998, -5, 16, -29.599998, 16, -39.5, 23, -42, 23, -42, 31.099998, -35.6, 35, 0, 35, 0, 60.4, 7.4000015, 59, 24, 59, 24, 33.800003, 55.1, 32, 59.199997, 32, 54, 21.5, 54, 19.300003, 38.1, 17, 36, 17, 36, -38.6, 22, -59.7)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SwordArea"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_od3ui")
+}

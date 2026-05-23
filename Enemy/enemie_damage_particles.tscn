@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dph7viciq6kx3"]
+
+[ext_resource type="Texture2D" uid="uid://cvc83mt104t67" path="res://textures/Damage_particle.png" id="1_ufvhr"]
+[ext_resource type="Script" uid="uid://vbyewabgscgm" path="res://Enemy/enemie_damage_particles.gd" id="2_n14ad"]
+
+[node name="damage_particles" type="CPUParticles2D"]
+emitting = false
+amount = 16
+texture = ExtResource("1_ufvhr")
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+emission_shape = 1
+emission_sphere_radius = 30.0
+particle_flag_align_y = true
+spread = 180.0
+initial_velocity_max = 300.0
+script = ExtResource("2_n14ad")
+
+[connection signal="finished" from="." to="." method="_on_finished"]
